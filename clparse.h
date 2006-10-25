@@ -31,7 +31,7 @@
 #define CL_EXIT_REQ	2
 #define CL_NO_ARG_VAL   3
 
-struct clparse_opts {
+struct clparse_opt {
 	char short_opt;
 	char *long_opt;
 	int  has_value;		  /* 0 - no, 1 - yes */

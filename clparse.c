@@ -35,7 +35,7 @@
  * po is passed as is to the 2nd argument of the action callback.
  */
 int cl_get_prog_opts(int argc, char *argv[],
-		     struct clparse_opts *opts, int num_opts,
+		     struct clparse_opt *opts, int num_opts,
 		     void *po, int *index_last, int silent)
 {
 	int i;
