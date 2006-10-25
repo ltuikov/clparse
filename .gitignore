@@ -1,0 +1,5 @@
+.*~
+*~
+clparse.a
+clparse.o
+libclparse.so
