@@ -28,15 +28,15 @@
 CLPARSE_H=clparse.h
 CLPARSE_OBJ=clparse.o
 
-all: $(CLPARSE_OBJ:.o=.so) $(CLPARSE_OBJ:.o=.a)
+all: lib$(CLPARSE_OBJ:.o=.so) $(CLPARSE_OBJ:.o=.a)
 
 $(CLPARSE_OBJ): $(CLPARSE_H)
 
-%.so: %.c %.h
+lib%.so: %.c %.h
 	$(CC) -shared -fpic $< -o $@
 
 %.a: %.o
 	$(AR) rc $@ $<
 
 clean:
-	$(RM) *~ $(CLPARSE_OBJ) $(CLPARSE_OBJ:.o=.so) $(CLPARSE_OBJ:.o=.a)
+	$(RM) *~ $(CLPARSE_OBJ) lib$(CLPARSE_OBJ:.o=.so) $(CLPARSE_OBJ:.o=.a)
