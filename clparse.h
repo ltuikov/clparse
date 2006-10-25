@@ -34,7 +34,7 @@
 struct clparse_opts {
 	char short_opt;
 	char *long_opt;
-	int  has_value;
+	int  has_value;		  /* 0 - no, 1 - yes */
 	int (*action)(char *value, void *po);
 	char *description;
 };
