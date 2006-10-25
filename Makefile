@@ -23,6 +23,8 @@
 # 02110-1301 USA
 #
 
+CFLAGS=-g -Wall
+
 .PHONY: clean so ar
 
 CLPARSE_H=clparse.h
@@ -33,7 +35,7 @@ all: lib$(CLPARSE_OBJ:.o=.so) $(CLPARSE_OBJ:.o=.a)
 $(CLPARSE_OBJ): $(CLPARSE_H)
 
 lib%.so: %.c %.h
-	$(CC) -shared -fpic $< -o $@
+	$(CC) $(CFLAGS) -shared -fpic $< -o $@
 
 %.a: %.o
 	$(AR) rc $@ $<
