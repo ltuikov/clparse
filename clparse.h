@@ -39,4 +39,19 @@ struct clparse_opt {
 	char *description;
 };
 
+/**
+ * cl_get_prog_opts -- get program options
+ * index_last if non-null will be set to the index of the last
+ * argv which didn't belong to an argument.
+ * po is passed as is to the 2nd argument of the action callback.
+ */
+int cl_get_prog_opts(int argc, char *argv[],
+		     struct clparse_opt *opts, int num_opts,
+		     void *po, int *index_last, int silent);
+/**
+ * cl_print__args_help -- Print the options in a "help" format
+ * as described by the struct clparse_opt array.
+ */
+void cl_print_args_help(struct clparse_opt *opts, int num_opts);
+
 #endif /* __CLPARSE_H__ */

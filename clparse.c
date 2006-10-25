@@ -129,3 +129,16 @@ int cl_get_prog_opts(int argc, char *argv[],
 	}
 	return 0;
 }
+
+void cl_print_args_help(struct clparse_opt *opts, int num_opts)
+{
+	int i;
+	for (i = 0; i < num_opts; i++) {
+		printf("  -%c%s or --%s%s\t%s\n",
+		       opts[i].short_opt,
+		       opts[i].has_value ? " <argument>" : "",
+		       opts[i].long_opt,
+		       opts[i].has_value ? "[=| ]<argument>" : "",
+		       opts[i].description);
+	}
+}
