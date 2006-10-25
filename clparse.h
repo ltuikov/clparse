@@ -52,6 +52,6 @@ int cl_get_prog_opts(int argc, char *argv[],
  * cl_print__args_help -- Print the options in a "help" format
  * as described by the struct clparse_opt array.
  */
-void cl_print_args_help(struct clparse_opt *opts, int num_opts);
+void cl_print_args_help(const struct clparse_opt *opts, const int num_opts);
 
 #endif /* __CLPARSE_H__ */
