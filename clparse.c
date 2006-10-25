@@ -130,7 +130,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 	return 0;
 }
 
-void cl_print_args_help(const struct clparse_opt *opts, const int num_opts)
+void cl_print_opts_help(const struct clparse_opt *opts, const int num_opts)
 {
 	int i;
 	for (i = 0; i < num_opts; i++) {
