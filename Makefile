@@ -32,7 +32,7 @@ all: $(CLPARSE_OBJ:.o=.so) $(CLPARSE_OBJ:.o=.a)
 
 $(CLPARSE_OBJ): $(CLPARSE_H)
 
-%.so: %.c
+%.so: %.c %.h
 	$(CC) -shared -fpic $< -o $@
 
 %.a: %.o
