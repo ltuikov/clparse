@@ -38,7 +38,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 		     const struct clparse_opt *opts, const int num_opts,
 		     void *po, int *index_last, int silent)
 {
-	int i;
+	int i, res;
 	const char *prog = NULL;
 
 	if (argc <= 1)
@@ -116,8 +116,8 @@ int cl_get_prog_opts(int argc, char *argv[],
 					}
 				}
 			}
-			if (opts[k].action(value, po))
-				return CL_EXIT_REQ;
+			if ((res = opts[k].action(value, po)) != 0)
+				return res;
 			else
 				break;
 		}
