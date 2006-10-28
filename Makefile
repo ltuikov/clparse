@@ -23,9 +23,9 @@
 # 02110-1301 USA
 #
 
-CFLAGS=-g -Wall
+CFLAGS=-g -Wall -pedantic -std=c99
 
-.PHONY: clean so ar
+.PHONY: clean all
 
 CLPARSE_H=clparse.h
 CLPARSE_OBJ=clparse.o
