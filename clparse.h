@@ -29,6 +29,7 @@
 
 #define CL_NO_ARGS	1
 #define CL_NO_ARG_VAL   2
+#define CL_UNKNWN_ARG	3
 
 struct clparse_opt {
 	char short_opt;

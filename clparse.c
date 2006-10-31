@@ -125,6 +125,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 			if (!silent)
 				fprintf(stderr, "%s: no such argument \"%s\"\n",
 					prog, argv[i]);
+			return CL_UNKNWN_ARG;
 		}
 	}
 	return 0;
