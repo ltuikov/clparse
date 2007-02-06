@@ -33,6 +33,7 @@
  * index_last if non-null will be set to the index of the last
  * argv which didn't belong to an argument.
  * po is passed as is to the 2nd argument of the action callback.
+ * Returns one of the macros above.
  */
 int cl_get_prog_opts(int argc, char *argv[],
 		     const struct clparse_opt *opts, const int num_opts,
@@ -88,7 +89,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 									"value\n", prog, argv[i]);
 							if (index_last)
 								*index_last = i;
-							return CL_NO_ARG_VAL;
+							return CL_NO_OPT_VAL;
 						}
 					}
 				}
@@ -100,7 +101,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 								"value\n", prog, argv[i]);
 						if (index_last)
 							*index_last = i;
-						return CL_NO_ARG_VAL;
+						return CL_NO_OPT_VAL;
 					} else {
 						i++;
 						value = argv[i];
@@ -111,7 +112,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 									"value\n", prog, argv[i-1]);
 							if (index_last)
 								*index_last = i;
-							return CL_NO_ARG_VAL;
+							return CL_NO_OPT_VAL;
 						}
 					}
 				}
@@ -125,7 +126,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 			if (!silent)
 				fprintf(stderr, "%s: no such argument \"%s\"\n",
 					prog, argv[i]);
-			return CL_UNKNWN_ARG;
+			return CL_UNKNWN_OPT;
 		}
 	}
 	return 0;

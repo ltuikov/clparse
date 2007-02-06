@@ -28,8 +28,8 @@
 #define __CLPARSE_H__
 
 #define CL_NO_ARGS	1
-#define CL_NO_ARG_VAL   2
-#define CL_UNKNWN_ARG	3
+#define CL_NO_OPT_VAL   2
+#define CL_UNKNWN_OPT	3
 
 struct clparse_opt {
 	char short_opt;
@@ -44,6 +44,7 @@ struct clparse_opt {
  * index_last if non-null will be set to the index of the last
  * argv which didn't belong to an argument.
  * po is passed as is to the 2nd argument of the action callback.
+ * Returns one of the macros above.
  */
 int cl_get_prog_opts(int argc, char *argv[],
 		     const struct clparse_opt *opts, const int num_opts,
