@@ -136,11 +136,18 @@ void cl_print_opts_help(const struct clparse_opt *opts, const int num_opts)
 {
 	int i;
 	for (i = 0; i < num_opts; i++) {
-		fprintf(stderr, "  -%c%s or --%s%s\t%s\n",
-		       opts[i].short_opt,
-		       opts[i].has_value ? " <argument>" : "",
-		       opts[i].long_opt,
-		       opts[i].has_value ? "[=| ]<argument>" : "",
-		       opts[i].description);
+		if (opts[i].short_opt != '\0') {
+			fprintf(stderr, "  -%c%s or --%s%s\t%s\n",
+				opts[i].short_opt,
+				opts[i].has_value ? " <argument>" : "",
+				opts[i].long_opt,
+				opts[i].has_value ? "[=| ]<argument>" : "",
+				opts[i].description);
+		} else {
+			fprintf(stderr, "  --%s%s\t%s\n",
+				opts[i].long_opt,
+				opts[i].has_value ? "[=| ]<argument>" : "",
+				opts[i].description);
+		}
 	}
 }
