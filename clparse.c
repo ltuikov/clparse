@@ -30,14 +30,14 @@
 
 /**
  * cl_get_prog_opts -- get program options
- * index_last if non-null will be set to the index of the last
+ * index_first if non-null will be set to the index of the first
  * argv which didn't belong to an argument.
  * po is passed as is to the 2nd argument of the action callback.
  * Returns one of the macros above.
  */
 int cl_get_prog_opts(int argc, char *argv[],
 		     const struct clparse_opt *opts, const int num_opts,
-		     void *po, int *index_last, int silent)
+		     void *po, int *index_first, int silent)
 {
 	int i, res;
 	const char *prog = NULL;
@@ -62,9 +62,9 @@ int cl_get_prog_opts(int argc, char *argv[],
 		if (!argv[i])
 			continue;
 		if (argv[i][0] != '-') {
-			if (index_last)
-				*index_last = i;
-			continue;
+			if (index_first)
+				*index_first = i;
+			return 0;
 		}
 		if (argv[i][1] == '-') {
 			long_opt = 1;
@@ -87,8 +87,8 @@ int cl_get_prog_opts(int argc, char *argv[],
 								fprintf(stderr,
 									"%s: argument %s needs a "
 									"value\n", prog, argv[i]);
-							if (index_last)
-								*index_last = i;
+							if (index_first)
+								*index_first = i;
 							return CL_NO_OPT_VAL;
 						}
 					}
@@ -99,8 +99,8 @@ int cl_get_prog_opts(int argc, char *argv[],
 							fprintf(stderr,
 								"%s: argument %s needs a "
 								"value\n", prog, argv[i]);
-						if (index_last)
-							*index_last = i;
+						if (index_first)
+							*index_first = i;
 						return CL_NO_OPT_VAL;
 					} else {
 						i++;
@@ -110,8 +110,8 @@ int cl_get_prog_opts(int argc, char *argv[],
 								fprintf(stderr,
 									"%s: argument %s needs a "
 									"value\n", prog, argv[i-1]);
-							if (index_last)
-								*index_last = i;
+							if (index_first)
+								*index_first = i;
 							return CL_NO_OPT_VAL;
 						}
 					}
