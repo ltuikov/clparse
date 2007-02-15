@@ -85,7 +85,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 						if (!*value) {
 							if (!silent)
 								fprintf(stderr,
-									"%s: argument %s needs a "
+									"%s: option %s needs a "
 									"value\n", prog, argv[i]);
 							if (index_first)
 								*index_first = i;
@@ -97,7 +97,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 					if (i + 1 >= argc) {
 						if (!silent)
 							fprintf(stderr,
-								"%s: argument %s needs a "
+								"%s: option %s needs a "
 								"value\n", prog, argv[i]);
 						if (index_first)
 							*index_first = i;
@@ -108,7 +108,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 						if (!value || !*value) {
 							if (!silent)
 								fprintf(stderr,
-									"%s: argument %s needs a "
+									"%s: option %s needs a "
 									"value\n", prog, argv[i-1]);
 							if (index_first)
 								*index_first = i;
@@ -124,7 +124,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 		}
 		if (k >= num_opts) {
 			if (!silent)
-				fprintf(stderr, "%s: no such argument \"%s\"\n",
+				fprintf(stderr, "%s: no such option \"%s\"\n",
 					prog, argv[i]);
 			return CL_UNKNWN_OPT;
 		}
