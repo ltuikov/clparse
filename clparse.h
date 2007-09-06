@@ -33,6 +33,9 @@
 #define CL_NO_OPT_VAL   2
 #define CL_UNKNWN_OPT	3
 
+#define SILENT		0
+#define NOT_SILENT	1
+
 struct clparse_opt {
 	char short_opt;
 	char *long_opt;
