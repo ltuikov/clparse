@@ -27,6 +27,8 @@
 #ifndef __CLPARSE_H__
 #define __CLPARSE_H__
 
+#include <stdio.h>
+
 #define CL_NO_ARGS	1
 #define CL_NO_OPT_VAL   2
 #define CL_UNKNWN_OPT	3
@@ -41,18 +43,22 @@ struct clparse_opt {
 
 /**
  * cl_get_prog_opts -- get program options
- * index_first if non-null will be set to the index of the first
- * argv which didn't belong to an argument.
- * po is passed as is to the 2nd argument of the action callback.
+ * @opts: an array of struct clparse_opt, i.e. options
+ * @num_opts: number of elements in @opts
+ * @po is passed as is to the 2nd argument of the clparse_opt::action callback.
+ * @index_first: if non-null will be set to the index of the first
+ *      argv which didn't belong to an argument.
+ * @out: a standard I/O stream where output is to be printed to.
  * Returns one of the macros above.
  */
 int cl_get_prog_opts(int argc, char *argv[],
 		     const struct clparse_opt *opts, const int num_opts,
-		     void *po, int *index_first, int silent);
+		     void *po, int *index_first, int silent, FILE *out);
 /**
  * cl_print__args_help -- Print the options in a "help" format
  * as described by the struct clparse_opt array.
  */
-void cl_print_opts_help(const struct clparse_opt *opts, const int num_opts);
+void cl_print_opts_help(const struct clparse_opt *opts, const int num_opts,
+			FILE *out);
 
 #endif /* __CLPARSE_H__ */

@@ -37,7 +37,7 @@
  */
 int cl_get_prog_opts(int argc, char *argv[],
 		     const struct clparse_opt *opts, const int num_opts,
-		     void *po, int *index_first, int silent)
+		     void *po, int *index_first, int silent, FILE *out)
 {
 	int i, res;
 	const char *prog = NULL;
@@ -84,7 +84,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 						value++;
 						if (!*value) {
 							if (!silent)
-								fprintf(stderr,
+								fprintf(out,
 									"%s: option %s needs a "
 									"value\n", prog, argv[i]);
 							if (index_first)
@@ -96,7 +96,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 				if (!value) {
 					if (i + 1 >= argc) {
 						if (!silent)
-							fprintf(stderr,
+							fprintf(out,
 								"%s: option %s needs a "
 								"value\n", prog, argv[i]);
 						if (index_first)
@@ -107,7 +107,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 						value = argv[i];
 						if (!value || !*value) {
 							if (!silent)
-								fprintf(stderr,
+								fprintf(out,
 									"%s: option %s needs a "
 									"value\n", prog, argv[i-1]);
 							if (index_first)
@@ -124,7 +124,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 		}
 		if (k >= num_opts) {
 			if (!silent)
-				fprintf(stderr, "%s: no such option \"%s\"\n",
+				fprintf(out, "%s: no such option \"%s\"\n",
 					prog, argv[i]);
 			return CL_UNKNWN_OPT;
 		}
@@ -132,19 +132,20 @@ int cl_get_prog_opts(int argc, char *argv[],
 	return 0;
 }
 
-void cl_print_opts_help(const struct clparse_opt *opts, const int num_opts)
+void cl_print_opts_help(const struct clparse_opt *opts, const int num_opts,
+			FILE *out)
 {
 	int i;
 	for (i = 0; i < num_opts; i++) {
 		if (opts[i].short_opt != '\0') {
-			fprintf(stderr, "  -%c%s or --%s%s\t%s\n",
+			fprintf(out, "  -%c%s or --%s%s\t%s\n",
 				opts[i].short_opt,
 				opts[i].has_value ? " <argument>" : "",
 				opts[i].long_opt,
 				opts[i].has_value ? "[=| ]<argument>" : "",
 				opts[i].description);
 		} else {
-			fprintf(stderr, "  --%s%s\t%s\n",
+			fprintf(out, "  --%s%s\t%s\n",
 				opts[i].long_opt,
 				opts[i].has_value ? "[=| ]<argument>" : "",
 				opts[i].description);
