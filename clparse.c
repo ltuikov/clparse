@@ -71,19 +71,17 @@ int cl_get_prog_opts(int argc, char *argv[],
 			} else if (opts[k].short_opt != *op)
 				continue;
 			if (opts[k].has_value) {
-				if (long_opt) {
-					value = strchr(op, '=');
-					if (value) {
-						value++;
-						if (!*value) {
-							if (!silent)
-								fprintf(out,
-									"%s: option %s needs a "
-									"value\n", prog, argv[i]);
-							if (index_first)
-								*index_first = i;
-							return CL_NO_OPT_VAL;
-						}
+				value = strchr(op, '=');
+				if (value) {
+					value++;
+					if (!*value) {
+						if (!silent)
+							fprintf(out,
+								"%s: option %s needs a "
+								"value\n", prog, argv[i]);
+						if (index_first)
+							*index_first = i;
+						return CL_NO_OPT_VAL;
 					}
 				}
 				if (!value) {
@@ -142,7 +140,7 @@ void cl_print_opts_help(const struct clparse_opt *opts, const int num_opts,
 		if (opts[i].short_opt != '\0') {
 			fprintf(out, "  -%c%s or --%s%s\t%s\n",
 				opts[i].short_opt,
-				opts[i].has_value ? " <argument>" : "",
+				opts[i].has_value ? "[=| ]<argument>" : "",
 				opts[i].long_opt,
 				opts[i].has_value ? "[=| ]<argument>" : "",
 				opts[i].description);
