@@ -63,11 +63,12 @@ int cl_get_prog_opts(int argc, char *argv[],
 			op = &argv[i][2];
 		} else
 			op = &argv[i][1];
+	Again:
 		for (k = 0; k < num_opts; k++) {
 			if (long_opt) {
 				if (strncmp(opts[k].long_opt, op, strlen(opts[k].long_opt)) != 0)
 					continue;
-			} else if (opts[k].short_opt != *op || *(op+1) != '\0')
+			} else if (opts[k].short_opt != *op)
 				continue;
 			if (opts[k].has_value) {
 				if (long_opt) {
@@ -111,7 +112,16 @@ int cl_get_prog_opts(int argc, char *argv[],
 			}
 			if ((res = opts[k].action(value, po)) != 0)
 				return res;
-			else
+			if (!long_opt && !opts[k].has_value) {
+				/* Option has no value and is a short option.
+				 * Check if another option is right after it,
+				 * i.e. -abcd... */
+				op++;
+				if (*op)
+					goto Again;
+				else
+					break;
+			} else
 				break;
 		}
 		if (k >= num_opts) {
