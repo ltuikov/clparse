@@ -36,6 +36,8 @@ struct clparse_opt {
 	char *description;
 };
 
+#define CLPARSE_NUM_OPTS(__cl_arr) (sizeof(__cl_arr)/sizeof(__cl_arr[0]))
+
 /**
  * cl_get_prog_opts -- get program options
  * @argc: argc as supplied to main()
