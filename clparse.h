@@ -25,8 +25,8 @@
 #define CL_NO_OPT_VAL   2
 #define CL_UNKNWN_OPT	3
 
-#define SILENT		0
-#define NOT_SILENT	1
+#define SILENT		1
+#define NOT_SILENT	0
 
 struct clparse_opt {
 	char short_opt;
@@ -38,11 +38,14 @@ struct clparse_opt {
 
 /**
  * cl_get_prog_opts -- get program options
+ * @argc: argc as supplied to main()
+ * @argv: argv as supplied to main()
  * @opts: an array of struct clparse_opt, i.e. options
  * @num_opts: number of elements in @opts
- * @po is passed as is to the 2nd argument of the clparse_opt::action callback.
+ * @po: is passed as is to the 2nd argument of the clparse_opt::action callback.
  * @index_first: if non-null will be set to the index of the first
  *      argv which didn't belong to an argument.
+ * @silent: true if clparse should be silent
  * @out: a standard I/O stream where output is to be printed to.
  * Returns one of the macros above.
  */

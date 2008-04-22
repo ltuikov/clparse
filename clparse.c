@@ -25,6 +25,7 @@
  * index_first if non-null will be set to the index of the first
  * argv which didn't belong to an argument.
  * po is passed as is to the 2nd argument of the action callback.
+ * For more details see the header file.
  * Returns one of the macros above.
  */
 int cl_get_prog_opts(int argc, char *argv[],
@@ -65,7 +66,7 @@ int cl_get_prog_opts(int argc, char *argv[],
 			op = &argv[i][1];
 	Again:
 		for (k = 0; k < num_opts; k++) {
-			if (long_opt) {
+			if (long_opt && opts[k].long_opt) {
 				if (strncmp(opts[k].long_opt, op, strlen(opts[k].long_opt)) != 0)
 					continue;
 			} else if (opts[k].short_opt != *op)
@@ -144,7 +145,7 @@ void cl_print_opts_help(const struct clparse_opt *opts, const int num_opts,
 				opts[i].long_opt,
 				opts[i].has_value ? "[=| ]<argument>" : "",
 				opts[i].description);
-		} else {
+		} else if (opts[i].long_opt != NULL) {
 			fprintf(out, "  --%s%s\t%s\n",
 				opts[i].long_opt,
 				opts[i].has_value ? "[=| ]<argument>" : "",
