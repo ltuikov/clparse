@@ -124,9 +124,14 @@ int cl_get_prog_opts(int argc, char *argv[],
 				break;
 		}
 		if (k >= num_opts) {
-			if (!silent)
-				fprintf(out, "%s: no such option \"%s\"\n",
-					prog, argv[i]);
+			if (!silent) {
+				if (long_opt)
+					fprintf(out, "%s: no such option \"%s\"\n",
+						prog, op);
+				else
+					fprintf(out, "%s: no such option \"%c\"\n",
+						prog, *op);
+			}
 			return CL_UNKNWN_OPT;
 		}
 	}
